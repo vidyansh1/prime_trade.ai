@@ -1,5 +1,6 @@
-const logout = (req,res) => {
-    res.clearCookie("token");
-    res.redirect('/');
-}
+const logout = (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/");
+};
+
 module.exports = { logout };

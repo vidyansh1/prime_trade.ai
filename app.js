@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const methodOverride = require('method-override'); // ✅ only once
 
 const connectDB = require('./config/connectDB');
 const authRoutes = require('./router/authroute');
@@ -14,19 +15,19 @@ const PORT = process.env.PORT || 8000;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Connect database
+// DB connection
 connectDB();
 
 // Middleware
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method')); // ✅ important for PUT/DELETE in forms
 
 // Home route
 app.get("/", (req, res) => {
   const token = req.cookies.token;
   let user = null;
-
   if (token) {
     try {
       const jwt = require('jsonwebtoken');
@@ -35,7 +36,6 @@ app.get("/", (req, res) => {
       user = null;
     }
   }
-
   res.render("home", { user });
 });
 

@@ -16,7 +16,7 @@
     <strong><h1>Welcome to Task Manager</h1></strong>
 
     <% if (user) { %>
-      <p><strong>You are logged in as</strong></p>
+      <p><strong>You are logged in as <%= user.name %> </strong></p>
       <a href="/tasks" class="btn btn-primary">Go to My Tasks</a>
     <% } else { %>
       <p>Please login or signup to manage your tasks.</p>

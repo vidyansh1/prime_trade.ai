@@ -1,21 +1,18 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 exports.auth = (req, res, next) => {
   const token = req.cookies.token;
-  if (!token) return res.redirect("/login");
+  if (!token) return res.redirect("/api/v1/login");
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (err) {
-    res.redirect("/login");
+    res.redirect("/api/v1/login");
   }
 };
 
 exports.isAdmin = (req, res, next) => {
-  if (req.user.role !== "admin") {
-    return res.status(403).send("Only admin can perform this action");
-  }
+  if (req.user.role !== "admin") return res.status(403).send("Only admin can perform this action");
   next();
 };

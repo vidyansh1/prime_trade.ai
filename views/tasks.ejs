@@ -56,13 +56,15 @@
               <% } %>
             </td>
             <td>
+              <!-- Update / Toggle Status -->
               <form action="/api/v1/tasks/updateTasks/<%= task._id %>?_method=PUT" method="POST" class="d-inline">
                 <input type="hidden" name="title" value="<%= task.title %>">
                 <input type="hidden" name="description" value="<%= task.description %>">
                 <input type="hidden" name="status" value="<%= task.status === 'pending' ? 'completed' : 'pending' %>">
-                <button type="submit" class="btn btn-sm btn-warning">Toggle Status</button>
+                <button type="submit" class="btn btn-sm btn-warning">Update</button>
               </form>
 
+              <!-- Delete Task -->
               <form action="/api/v1/tasks/deleteTasks/<%= task._id %>?_method=DELETE" method="POST" class="d-inline">
                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
               </form>
