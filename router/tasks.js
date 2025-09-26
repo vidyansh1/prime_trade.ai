@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const taskController = require('../controllers/taskcontroller');
+const taskController = require('../controllers/taskcontroller.js');
 const { auth, isAdmin } = require('../middlewares/authmiddleware');
 
 // Protect all task routes
